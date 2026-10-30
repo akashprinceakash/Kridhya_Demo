@@ -1,0 +1,14 @@
+# dependencies — Vercel installs these itself
+node_modules/
+
+# build output — Vercel runs `vite build`
+dist/
+
+# local / editor
+.vite/
+*.local
+.env
+.env.*
+.DS_Store
+Thumbs.db
+*.log
