@@ -4,6 +4,7 @@ import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion
 import { Breadcrumbs, Ornament, ProductCard } from '../components/ui'
 import { EASE, FadeUp, Stagger } from '../components/motion'
 import { POSTS, getPost } from '../data/blog'
+import { srcSetFor } from '../data/images'
 import { PRODUCTS } from '../data/products'
 import { PostCard, fmtDate } from './Blog'
 import useDocumentMeta from '../hooks/useDocumentMeta'
@@ -35,18 +36,18 @@ function Article({ post }) {
             <motion.h1 initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, ease: EASE }} className="h-display mt-5">
               {post.title}
             </motion.h1>
-            <p className="mt-6 text-sm uppercase tracking-[0.18em] text-wine-900/55">
+            <p className="mt-6 text-[16px] uppercase tracking-[0.18em] text-wine-900/55">
               <time dateTime={post.date}>{fmtDate(post.date)}</time> · {post.readTime}
             </p>
           </div>
           <figure ref={ref} className="container-site mt-10">
             <div className="relative aspect-[21/9] overflow-hidden bg-cream">
-              <motion.img style={{ y, scale: 1.15 }} src={post.cover} alt={post.coverAlt} className="absolute inset-0 h-full w-full object-cover" />
+              <motion.img style={{ y, scale: 1.15 }} src={post.cover} srcSet={srcSetFor(post.cover)} sizes="100vw" alt={post.coverAlt} className="absolute inset-0 h-full w-full object-cover" />
             </div>
           </figure>
         </header>
 
-        <div className="bg-ivory py-12 sm:py-16">
+        <div className="bg-ivory py-8 sm:py-10">
           <div className="container-site relative grid gap-10 lg:grid-cols-12">
             {/* reading progress */}
             <aside className="hidden lg:col-span-2 lg:block">
@@ -55,22 +56,22 @@ function Article({ post }) {
               </div>
             </aside>
             <div className="mx-auto max-w-[68ch] lg:col-span-8">
-              <FadeUp as="p" className="font-display text-[clamp(1.3rem,2vw,1.6rem)] font-light italic leading-snug text-wine-700">{post.excerpt}</FadeUp>
-              <div className="mt-10 space-y-6 text-[16px] leading-[1.85] text-wine-900/85">
+              <FadeUp as="p" className="font-display text-[clamp(calc(1.3rem_+_2px),calc(2vw_+_2px),calc(1.6rem_+_2px))] font-light italic leading-snug text-wine-700">{post.excerpt}</FadeUp>
+              <div className="mt-10 space-y-6 text-[18px] leading-[1.85] text-wine-900/85">
                 {post.body.map((b, i) => {
-                  if (b.h2) return <h2 key={i} className="!mt-10 text-[clamp(1.5rem,2.4vw,1.9rem)] leading-tight text-wine-900">{b.h2}</h2>
-                  if (b.h3) return <h3 key={i} className="!mt-10 font-display text-2xl text-wine-900">{b.h3}</h3>
+                  if (b.h2) return <h2 key={i} className="!mt-10 text-[clamp(calc(1.5rem_+_2px),calc(2.4vw_+_2px),calc(1.9rem_+_2px))] leading-tight text-wine-900">{b.h2}</h2>
+                  if (b.h3) return <h3 key={i} className="!mt-10 font-display text-[26px] text-wine-900">{b.h3}</h3>
                   if (b.img)
                     return (
                       <figure key={i} className="!my-12">
-                        <img src={b.img} alt={b.caption} loading="lazy" className="aspect-[4/3] w-full object-cover" />
-                        <figcaption className="mt-3 text-center text-sm italic text-wine-900/55">{b.caption}</figcaption>
+                        <img src={b.img} srcSet={srcSetFor(b.img)} sizes="(min-width: 768px) 680px, 100vw" alt={b.caption} loading="lazy" className="aspect-[4/3] w-full object-cover" />
+                        <figcaption className="mt-3 text-center text-[16px] italic text-wine-900/55">{b.caption}</figcaption>
                       </figure>
                     )
                   return <p key={i}>{b.p}</p>
                 })}
               </div>
-              <div className="mt-14 border-t border-wine-900/10 pt-8 text-[15px] text-wine-900/70">
+              <div className="mt-10 border-t border-wine-900/10 pt-6 text-[17px] text-wine-900/70">
                 Looking for the right piece? <Link to="/shop" className="link-underline text-wine-700">Explore the collection</Link> or read about <Link to="/corporate-gifting" className="link-underline text-wine-700">corporate gifting</Link>.
               </div>
             </div>

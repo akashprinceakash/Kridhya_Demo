@@ -10,7 +10,7 @@ import { EASE } from './motion'
 const SPRING = { type: 'spring', stiffness: 170, damping: 26, mass: 0.9 }
 const AUTOPLAY = 4200
 const PERSPECTIVE = 1400
-const DEPTH = 140
+const DEPTH = 90
 
 // 3D coverflow: the focused piece faces the viewer, neighbours swing back on a curved plane.
 // Circular — cards wrap around both sides. Drag / swipe, arrows, keyboard and click-to-focus.
@@ -37,10 +37,12 @@ export default function CoverflowCarousel({ products }) {
   }, [active, hover, reduce, n])
 
   const mobile = width < 640
-  const cardW = Math.round(mobile ? Math.max(180, width * 0.56) : Math.min(300, Math.max(190, width * 0.2)))
-  const visible = mobile ? 2 : 3
+  // The focused piece is the hero of the row: large and dead-centre; neighbours step down in size.
+  const cardW = Math.round(mobile ? Math.min(300, width * 0.68) : Math.min(390, Math.max(240, width * 0.31)))
+  const visible = mobile ? 1 : 2
+  const scaleAt = (abs) => 1 - Math.min(abs, 3) * (mobile ? 0.16 : 0.15)
   // desktop: outermost visible cards land on the container edges, so the rail spans the full width
-  const spacing = mobile ? cardW * 0.52 : ((width / 2 - cardW / 2) / visible) * 1.1
+  const spacing = mobile ? cardW * 0.62 : (width / 2 - (cardW * scaleAt(visible)) / 2) / visible
   const go = (step) => setActive((a) => (((a + step) % n) + n) % n)
   const offsetOf = (i) => {
     let d = i - active
@@ -67,7 +69,7 @@ export default function CoverflowCarousel({ products }) {
       <motion.div
         ref={stage}
         className="relative w-full select-none"
-        style={{ height: cardW * 1.25 + 40, perspective: PERSPECTIVE, touchAction: 'pan-y' }}
+        style={{ height: cardW * 1.25 + 56, perspective: PERSPECTIVE, touchAction: 'pan-y' }}
         onPanEnd={(_, info) => {
           if (Math.abs(info.offset.x) < 40) return
           const steps = Math.max(1, Math.round(Math.abs(info.offset.x) / spacing))
@@ -91,9 +93,9 @@ export default function CoverflowCarousel({ products }) {
                 // counter the perspective shrink of pushed-back cards so screen spacing stays even
                 x: (d * spacing * (PERSPECTIVE + abs * DEPTH)) / PERSPECTIVE,
                 z: -abs * DEPTH,
-                rotateY: reduce ? 0 : Math.max(-55, Math.min(55, -d * 32)),
-                scale: 1 - Math.min(abs, 4) * 0.06,
-                opacity: hidden ? 0 : 1 - abs * 0.16,
+                rotateY: reduce ? 0 : Math.max(-30, Math.min(30, -d * 16)),
+                scale: scaleAt(abs),
+                opacity: hidden ? 0 : 1 - abs * 0.12,
               }}
               transition={reduce ? { duration: 0 } : SPRING}
               aria-hidden={d !== 0}
@@ -107,11 +109,11 @@ export default function CoverflowCarousel({ products }) {
               >
                 <div className="relative aspect-[4/5] overflow-hidden bg-cream">
                   <img src={p.images[0]} alt={p.name} loading="lazy" draggable={false} data-placeholder="true" className="h-full w-full object-cover mix-blend-multiply transition-transform duration-700 group-hover:scale-[1.04]" />
-                  {p.badge && <span className="absolute left-2 top-2 bg-ivory/90 px-2 py-0.5 text-[10.5px] font-medium uppercase tracking-[0.16em] text-wine-900">{p.badge}</span>}
+                  {p.badge && <span className="absolute left-2 top-2 bg-ivory/90 px-2 py-0.5 text-[12.5px] font-medium uppercase tracking-[0.16em] text-wine-900">{p.badge}</span>}
                 </div>
                 <div className="flex items-center justify-between gap-2 px-1 pb-1 pt-2.5">
-                  <span className="truncate font-display text-[15px]">{p.name}</span>
-                  <span className="shrink-0 text-[12px] font-medium">{formatPrice(p.price)}</span>
+                  <span className="truncate font-display text-[19px] font-semibold">{p.name}</span>
+                  <span className="shrink-0 text-[15px] font-semibold">{formatPrice(p.price)}</span>
                 </div>
               </button>
             </motion.div>
@@ -124,9 +126,9 @@ export default function CoverflowCarousel({ products }) {
         <div className="min-h-[56px] text-center sm:text-left" aria-live="polite">
           <AnimatePresence mode="wait">
             <motion.div key={current.slug} initial={{ opacity: 0, y: 8, filter: 'blur(6px)' }} animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }} exit={{ opacity: 0, y: -6 }} transition={{ duration: 0.45, ease: EASE }}>
-              <p className="text-[11px] uppercase tracking-[0.18em] text-gold-deep">{getCategory(current.category)?.name}</p>
-              <Link to={`/product/${current.slug}`} className="link-underline mt-1 font-display text-2xl">{current.name}</Link>
-              <p className="mt-0.5 text-[13.5px] text-wine-900/70">{formatPrice(current.price)}</p>
+              <p className="text-[13px] uppercase tracking-[0.18em] text-gold-deep">{getCategory(current.category)?.name}</p>
+              <Link to={`/product/${current.slug}`} className="link-underline mt-1 font-display text-[26px]">{current.name}</Link>
+              <p className="mt-0.5 text-[15.5px] text-wine-900/70">{formatPrice(current.price)}</p>
             </motion.div>
           </AnimatePresence>
         </div>
@@ -134,7 +136,7 @@ export default function CoverflowCarousel({ products }) {
           <button type="button" onClick={() => add(current, current.finishes[0])} className="btn btn-wine">
             <IconBag size={15} /> Add to bag
           </button>
-          <span className="mx-2 font-display text-sm tabular-nums text-wine-900/60">
+          <span className="mx-2 font-display text-[16px] tabular-nums text-wine-900/60">
             {String(active + 1).padStart(2, '0')} / {String(n).padStart(2, '0')}
           </span>
           <button type="button" onClick={() => go(-1)} aria-label="Previous piece" className="icon-btn h-11 w-11 border-wine-900/20 hover:border-wine-900 hover:bg-wine-900 hover:text-ivory"><IconArrowLeft size={15} /></button>

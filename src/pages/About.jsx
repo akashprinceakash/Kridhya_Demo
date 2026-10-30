@@ -1,29 +1,60 @@
-import { Link } from 'react-router-dom'
+import { useEffect } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Ornament, PageHero, SectionHeading } from '../components/ui'
+import { HeroIndex, Ornament, PageHero, SectionHeading } from '../components/ui'
 import { FadeUp, ParallaxImage, ParallaxLayer, Stagger, blurChild } from '../components/motion'
 import { IMG } from '../data/images'
 import { WHATSAPP_MESSAGES, whatsappLink } from '../data/site'
 import { IconArrow, IconWhatsApp } from '../components/Icons'
 import useDocumentMeta from '../hooks/useDocumentMeta'
+import Founders from '../components/Founders'
 
 // Copy follows the "Suggested About Us Copy — Draft for Client Approval" in the developer brief.
 // Pending client sign-off; add verified brand facts only once approved.
 export default function About() {
   useDocumentMeta('About Us | Kridhya by Devanshi', 'At Kridhya by Devanshi, we believe the smallest details can hold the most meaning.')
+  const { hash } = useLocation()
+  // Deep links like /about#founder land on the section once the page has rendered.
+  useEffect(() => {
+    if (!hash) return
+    const t = setTimeout(() => document.querySelector(hash)?.scrollIntoView({ block: 'start' }), 650)
+    return () => clearTimeout(t)
+  }, [hash])
   return (
     <>
-      <PageHero eyebrow="About Us" title="Jewellery for the moments that matter" image={IMG.necklaceCloseup.src} imageAlt={IMG.necklaceCloseup.alt} position="50% 40%" detail={IMG.storyStill.src} detailAlt={IMG.storyStill.alt} />
+      <PageHero
+        eyebrow="About Us"
+        title="Jewellery for the moments that matter"
+        intro="Thoughtful design, timeless elegance and pieces that feel personal — meet the people and the ideas behind Kridhya."
+        image={IMG.necklaceCloseup.src}
+        imageAlt={IMG.necklaceCloseup.alt}
+        position="50% 40%"
+        detail={IMG.storyStill.src}
+        detailAlt={IMG.storyStill.alt}
+      >
+        <div className="mt-8 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap">
+          <a href="#founder" className="btn btn-gold font-semibold">Meet the founder</a>
+          <Link to="/shop" className="btn btn-outline-light font-semibold">Explore the collection</Link>
+        </div>
+        <HeroIndex
+          items={[
+            { label: 'Who we are', href: '#who-we-are' },
+            { label: 'Meet the founder', href: '#founder' },
+            { label: 'Our design philosophy', href: '#philosophy' },
+            { label: 'Our approach', href: '#approach' },
+          ]}
+        />
+      </PageHero>
 
       {/* introduction */}
-      <section className="section bg-ivory">
+      <section id="who-we-are" className="section scroll-mt-6 bg-ivory">
         <div className="container-site grid items-center gap-10 md:grid-cols-12">
           <div className="md:col-span-6">
             <FadeUp as="p" className="eyebrow text-gold-deep">Who we are</FadeUp>
-            <FadeUp as="p" delay={0.05} className="mt-3 font-display text-[clamp(1.6rem,2.6vw,2.2rem)] font-light leading-[1.25]">
+            <FadeUp as="p" delay={0.05} className="mt-3 font-display text-[clamp(calc(1.6rem_+_2px),calc(2.6vw_+_2px),calc(2.2rem_+_2px))] font-light leading-[1.25]">
               At Kridhya by Devanshi, we believe the smallest details can hold the most meaning.
             </FadeUp>
-            <FadeUp as="p" delay={0.1} className="mt-4 max-w-[56ch] text-[15.5px] leading-[1.8] text-wine-900/75">
+            <FadeUp as="p" delay={0.1} className="mt-4 max-w-[56ch] text-[17.5px] leading-[1.8] text-wine-900/75">
               Jewellery is more than something we wear — it can reflect our individuality, mark a special moment, or become part of a story we carry with us.
             </FadeUp>
           </div>
@@ -38,8 +69,10 @@ export default function About() {
         </div>
       </section>
 
+      <Founders />
+
       {/* philosophy */}
-      <section className="section bg-cream">
+      <section id="philosophy" className="section scroll-mt-6 bg-cream">
         <div className="container-site">
           <SectionHeading align="center" eyebrow="Our design philosophy" title="Thoughtful. Timeless. Personal." />
           <Stagger className="mt-10 grid gap-px bg-wine-900/10 sm:grid-cols-3">
@@ -49,9 +82,9 @@ export default function About() {
               ['Pieces that feel personal', 'From everyday expressions of style to gifts chosen for meaningful occasions, every design is made to feel uniquely yours.'],
             ].map(([t, b], i) => (
               <motion.div key={t} variants={blurChild} className="bg-cream p-6 sm:p-8">
-                <p className="font-display text-sm italic text-gold-deep">0{i + 1}</p>
-                <h3 className="mt-3 font-display text-2xl">{t}</h3>
-                <p className="mt-2 text-[14px] leading-relaxed text-wine-900/65">{b}</p>
+                <p className="font-display text-[16px] italic text-gold-deep">0{i + 1}</p>
+                <h3 className="mt-3 font-display text-[26px]">{t}</h3>
+                <p className="mt-2 text-[16px] leading-relaxed text-wine-900/65">{b}</p>
               </motion.div>
             ))}
           </Stagger>
@@ -59,7 +92,7 @@ export default function About() {
       </section>
 
       {/* approach + feeling */}
-      <section className="section bg-ivory">
+      <section id="approach" className="section scroll-mt-6 bg-ivory">
         <div className="container-site grid items-center gap-10 md:grid-cols-12">
           <div className="md:col-span-5">
             <ParallaxImage src={IMG.heartSilver.src} alt={IMG.heartSilver.alt} placeholder ratio="4/5" position="50% 40%" strength={8} />
@@ -68,15 +101,15 @@ export default function About() {
             <div>
               <FadeUp as="p" className="eyebrow text-gold-deep">Our approach to jewellery</FadeUp>
               <FadeUp as="h2" delay={0.05} className="h-section mt-3">From everyday style to meaningful occasions</FadeUp>
-              <FadeUp as="p" delay={0.1} className="mt-4 max-w-[54ch] text-[15.5px] leading-[1.8] text-wine-900/75">
+              <FadeUp as="p" delay={0.1} className="mt-4 max-w-[54ch] text-[17.5px] leading-[1.8] text-wine-900/75">
                 We design for real life — pieces that layer with ease, sit comfortably through the day and still feel special when the moment calls for it.
               </FadeUp>
             </div>
             <div className="hairline" />
             <div>
               <FadeUp as="p" className="eyebrow text-gold-deep">What we want you to feel</FadeUp>
-              <FadeUp as="p" delay={0.05} className="mt-3 font-display text-[clamp(1.5rem,2.4vw,2rem)] italic leading-snug text-wine-700">Seen, celebrated, and a little more yourself.</FadeUp>
-              <FadeUp as="p" delay={0.1} className="mt-4 max-w-[54ch] text-[15.5px] leading-[1.8] text-wine-900/75">
+              <FadeUp as="p" delay={0.05} className="mt-3 font-display text-[clamp(calc(1.5rem_+_2px),calc(2.4vw_+_2px),calc(2rem_+_2px))] italic leading-snug text-wine-700">Seen, celebrated, and a little more yourself.</FadeUp>
+              <FadeUp as="p" delay={0.1} className="mt-4 max-w-[54ch] text-[17.5px] leading-[1.8] text-wine-900/75">
                 We invite you to discover jewellery that feels uniquely yours — a piece that speaks to your style, your story, and the moments you want to remember.
               </FadeUp>
             </div>

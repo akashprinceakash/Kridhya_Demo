@@ -25,17 +25,23 @@ export default {
       fontFamily: {
         display: ['"Cormorant Garamond"', 'Georgia', 'serif'],
         sans: ['Jost', 'system-ui', 'sans-serif'],
+        // sturdier serif for the Contact page: reads well in bold on light grounds
+        contact: ['"Playfair Display"', 'Georgia', 'serif'],
       },
       letterSpacing: { luxe: '0.32em' },
       maxWidth: { site: '1240px' },
       transitionTimingFunction: { luxe: 'cubic-bezier(0.22, 1, 0.36, 1)' },
       keyframes: {
         fadeSlow: { from: { opacity: 0 }, to: { opacity: 1 } },
+        spinReverse: { from: { transform: 'rotate(360deg)' }, to: { transform: 'rotate(0deg)' } },
         marquee: { from: { transform: 'translateX(0)' }, to: { transform: 'translateX(-50%)' } },
         shimmer: { from: { backgroundPosition: '200% 0' }, to: { backgroundPosition: '-200% 0' } },
       },
       animation: {
         'fade-slow': 'fadeSlow 1s ease both',
+        // slow ornamental rotation for mandala backgrounds
+        'spin-slow': 'spin 120s linear infinite',
+        'spin-slow-reverse': 'spinReverse 160s linear infinite',
         marquee: 'marquee 40s linear infinite',
         shimmer: 'shimmer 6s linear infinite',
       },

@@ -177,7 +177,7 @@ export default function PanoramicSpreadHero({
   const textOpacity = useTransform(progress, [0.4, 0.9], [0, 1]);
 
   return (
-    <section ref={wrapRef} className={`relative w-full bg-wine-900 text-ivory ${reduce ? "h-[100svh]" : "h-[220vh] md:h-[300vh]"}`} aria-label="Collection preview">
+    <section ref={wrapRef} className={`relative w-full bg-wine-900 text-ivory ${reduce ? "h-[100svh]" : "h-[180vh] md:h-[220vh]"}`} aria-label="Collection preview">
       <div className="sticky top-0 flex h-[100svh] w-full items-center justify-center overflow-hidden" style={{ perspective: "1200px" }}>
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(201,164,106,0.14),transparent_60%)]" />
 
@@ -194,9 +194,9 @@ export default function PanoramicSpreadHero({
           className="pointer-events-none absolute z-[5] flex flex-col items-center px-6 text-center"
           style={{ y: textY, scale: textScale, opacity: textOpacity }}
         >
-          <span className="mb-3 font-sans text-[11px] font-medium uppercase tracking-[0.32em] text-gold">{eyebrow}</span>
-          <h2 className="font-display text-4xl font-light leading-none md:text-[3.4vw]">{title}</h2>
-          <p className="mt-4 max-w-[46ch] text-sm leading-relaxed text-ivory/70 md:text-[15px]">{description}</p>
+          <span className="mb-3 font-sans text-[13px] font-medium uppercase tracking-[0.32em] text-gold">{eyebrow}</span>
+          <h2 className="font-display text-[38px] font-light leading-none md:text-[3.4vw]">{title}</h2>
+          <p className="mt-4 max-w-[46ch] text-[16px] leading-relaxed text-ivory/70 md:text-[17px]">{description}</p>
         </motion.div>
 
         {children && (

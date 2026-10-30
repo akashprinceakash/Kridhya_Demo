@@ -9,6 +9,7 @@ import {
   useTransform,
   useVelocity,
 } from 'framer-motion'
+import { srcSetFor } from '../data/images'
 
 export const EASE = [0.22, 1, 0.36, 1]
 const VIEW = { once: true, margin: '-10% 0px' }
@@ -64,7 +65,7 @@ export function ParallaxLayer({ children, distance = 60, className }) {
 }
 
 // Image drifting inside a fixed frame. Frame reserves its ratio (no CLS).
-export function ParallaxImage({ src, alt, className = '', ratio, position = 'center', strength = 10, eager = false, placeholder }) {
+export function ParallaxImage({ src, alt, className = '', ratio, position = 'center', strength = 10, eager = false, placeholder, sizes = '(min-width: 1024px) 50vw, 100vw' }) {
   const ref = useRef(null)
   const reduce = useReducedMotion()
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
@@ -73,6 +74,8 @@ export function ParallaxImage({ src, alt, className = '', ratio, position = 'cen
     <div ref={ref} className={`relative overflow-hidden ${className}`} style={ratio ? { aspectRatio: ratio } : undefined}>
       <motion.img
         src={src}
+        srcSet={srcSetFor(src)}
+        sizes={sizes}
         alt={alt}
         loading={eager ? 'eager' : 'lazy'}
         decoding="async"
@@ -99,6 +102,8 @@ export function ExpandFrame({ src, alt, children, className = '', position = 'ce
       <motion.div style={{ clipPath: clip }} className="absolute inset-0 will-change-[clip-path]">
         <motion.img
           src={src}
+          srcSet={srcSetFor(src)}
+          sizes="100vw"
           alt={alt}
           loading="lazy"
           data-placeholder={placeholder ? 'true' : undefined}

@@ -61,10 +61,10 @@ export default function Shop() {
         <div className="container-site">
           <Breadcrumbs items={[{ label: 'Home', to: '/' }, cat ? { label: 'Collections', to: '/collections' } : { label: 'Shop' }, ...(cat ? [{ label: cat.name }] : [])]} />
           <div className="mt-5 grid items-end gap-4 lg:grid-cols-12">
-            <motion.h1 initial={{ opacity: 0, y: 14, filter: 'blur(10px)' }} animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }} transition={{ duration: 1, ease: EASE }} className="h-display lg:col-span-7">
+            <motion.h1 initial={{ opacity: 0, y: 14, filter: 'blur(10px)' }} animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }} transition={{ duration: 1, ease: EASE }} className="h-display font-medium lg:col-span-7">
               {cat ? cat.name : <>The <em className="text-wine-600">Collection</em></>}
             </motion.h1>
-            <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3, duration: 1 }} className="max-w-sm text-[14.5px] text-wine-900/65 lg:col-span-5 lg:justify-self-end">
+            <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3, duration: 1 }} className="max-w-sm text-[17px] font-medium text-wine-900/75 lg:col-span-5 lg:justify-self-end">
               {cat ? cat.blurb : 'Necklaces, earrings, cuffs, rings and brooches — designed for everyday elegance and the moments you’ll remember.'}
             </motion.p>
           </div>
@@ -72,12 +72,12 @@ export default function Shop() {
       </section>
 
       {/* filter bar */}
-      <div className="relative z-30 border-y border-wine-900/10 bg-ivory/95 backdrop-blur-md transition-[top] md:sticky md:top-0 duration-[450ms] ease-luxe [html[data-header=shown]_&]:top-[80px] sm:[html[data-header=shown]_&]:top-[84px]">
+      <div className="relative z-30 border-y border-wine-900/10 bg-ivory/95 backdrop-blur-md md:sticky md:top-[63px]">
         <div className="container-site flex flex-col gap-2 py-2 lg:flex-row lg:items-center lg:justify-between">
-          <nav aria-label="Categories" className="scrollbar-none -mx-5 flex gap-5 overflow-x-auto px-5 sm:mx-0 sm:px-0">
+          <nav aria-label="Categories" className="scrollbar-none -mx-5 flex gap-5 overflow-x-auto px-5 sm:mx-0 sm:px-0 lg:gap-4 xl:gap-5">
             {[{ slug: 'all', name: 'All' }, ...CATEGORIES].map((c) => {
               const active = category === c.slug
-              const cls = `min-h-[44px] min-w-[44px] shrink-0 border-b text-center text-[11px] uppercase tracking-[0.16em] transition-colors ${active ? 'border-wine-900 text-wine-900' : 'border-transparent text-wine-900/55 hover:text-wine-900'}`
+              const cls = `min-h-[44px] min-w-[44px] shrink-0 border-b text-center text-[13px] font-semibold uppercase tracking-[0.16em] transition-colors ${active ? 'border-wine-900 text-wine-900' : 'border-transparent text-wine-900/55 hover:text-wine-900'}`
               const inner = c.name
               const href = catHref(c.slug)
               return href ? (
@@ -88,7 +88,7 @@ export default function Shop() {
             })}
           </nav>
 
-          <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3 lg:shrink-0 lg:flex-nowrap">
             <label className="relative flex min-h-[44px] basis-full items-center sm:basis-auto">
               <span className="sr-only">Search jewellery</span>
               <IconSearch size={16} className="pointer-events-none absolute left-3 text-wine-900/50" />
@@ -97,7 +97,7 @@ export default function Shop() {
                 value={q}
                 onChange={(e) => setParam('q', e.target.value)}
                 placeholder="Search"
-                className="h-11 w-full border border-wine-900/15 bg-transparent pl-9 pr-3 text-[14px] placeholder:text-wine-900/45 focus:border-wine-700 focus:outline-none sm:w-44"
+                className="h-11 w-full border border-wine-900/15 bg-transparent pl-9 pr-3 text-[16px] placeholder:text-wine-900/45 focus:border-wine-700 focus:outline-none sm:w-40 xl:w-44"
               />
             </label>
             <div className="flex items-center gap-1.5" role="group" aria-label="Filter by finish">
@@ -106,12 +106,13 @@ export default function Shop() {
                   key={f}
                   type="button"
                   aria-pressed={finish === f}
+                  aria-label={f}
+                  title={f}
                   onClick={() => setParam('finish', finish === f ? '' : f)}
-                  className={`inline-flex h-11 min-w-[44px] items-center justify-center gap-2 border px-3 text-[12px] transition-colors ${finish === f ? 'border-wine-900 bg-wine-900 text-ivory' : 'border-wine-900/15 hover:border-wine-900/40'}`}
+                  className={`inline-flex h-11 min-w-[44px] items-center justify-center gap-2 border px-3 text-[14px] font-semibold transition-colors ${finish === f ? 'border-wine-900 bg-wine-900 text-ivory' : 'border-wine-900/15 hover:border-wine-900/40'}`}
                 >
                   <FinishDot finish={f} />
-                  <span className="hidden sm:inline">{f}</span>
-                  <span className="sr-only sm:hidden">{f}</span>
+                  <span className="hidden sm:inline lg:hidden 2xl:inline">{f}</span>
                 </button>
               ))}
             </div>
@@ -120,7 +121,7 @@ export default function Shop() {
               <select
                 value={sort}
                 onChange={(e) => setParam('sort', e.target.value)}
-                className="h-11 cursor-pointer appearance-none border border-wine-900/15 bg-transparent pl-3 pr-9 text-[13px] focus:border-wine-700 focus:outline-none"
+                className="h-11 cursor-pointer appearance-none font-semibold border border-wine-900/15 bg-transparent pl-3 pr-9 text-[15px] focus:border-wine-700 focus:outline-none"
               >
                 {Object.entries(SORTS).map(([k, v]) => <option key={k} value={k}>{v.label}</option>)}
               </select>
@@ -130,9 +131,9 @@ export default function Shop() {
         </div>
       </div>
 
-      <section className="bg-ivory pb-20 pt-8">
+      <section className="bg-ivory pb-12 pt-6">
         <div className="container-site">
-          <div className="mb-8 flex flex-wrap items-center gap-3 text-sm text-wine-900/65" aria-live="polite">
+          <div className="mb-8 flex flex-wrap items-center gap-3 text-[16px] font-semibold text-wine-900/75" aria-live="polite">
             <span>{filtered.length} {filtered.length === 1 ? 'piece' : 'pieces'}</span>
             {(finish || q) && (
               <>
@@ -150,7 +151,7 @@ export default function Shop() {
                 </Stagger>
               ) : (
                 <div className="py-24 text-center">
-                  <p className="font-display text-3xl">Nothing matches just yet.</p>
+                  <p className="font-display text-[32px]">Nothing matches just yet.</p>
                   <p className="mt-2 text-wine-900/65">Try a different finish or clear your search.</p>
                   <Link to="/shop" className="btn btn-outline-dark mt-8">View all jewellery</Link>
                 </div>
@@ -159,7 +160,7 @@ export default function Shop() {
           </AnimatePresence>
 
           {pages > 1 && (
-            <nav aria-label="Pagination" className="mt-14 flex items-center justify-center gap-2">
+            <nav aria-label="Pagination" className="mt-10 flex items-center justify-center gap-2">
               {Array.from({ length: pages }, (_, i) => i + 1).map((n) => (
                 <button
                   key={n}
@@ -167,7 +168,7 @@ export default function Shop() {
                   onClick={() => setParam('page', String(n))}
                   aria-current={n === current ? 'page' : undefined}
                   aria-label={`Page ${n}`}
-                  className={`h-11 w-11 font-display text-lg transition-colors ${n === current ? 'bg-wine-900 text-ivory' : 'border border-wine-900/15 hover:border-wine-900'}`}
+                  className={`h-11 w-11 font-display text-[20px] transition-colors ${n === current ? 'bg-wine-900 text-ivory' : 'border border-wine-900/15 hover:border-wine-900'}`}
                 >
                   {n}
                 </button>
@@ -175,7 +176,7 @@ export default function Shop() {
             </nav>
           )}
 
-          <p className="mt-10 text-center text-xs text-wine-900/45">Mockup preview — prices and photography are placeholders pending client approval.</p>
+          <p className="mt-10 text-center text-[14px] text-wine-900/45">Mockup preview — prices and photography are placeholders pending client approval.</p>
         </div>
       </section>
     </>

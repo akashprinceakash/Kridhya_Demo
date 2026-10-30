@@ -18,11 +18,11 @@ export default function Footer() {
 
   return (
     <footer className="border-t border-gold/15 bg-wine-950 text-ivory">
-      <div className="container-site grid grid-cols-2 gap-x-6 gap-y-10 py-14 lg:grid-cols-12 lg:gap-8">
+      <div className="container-site grid grid-cols-2 gap-x-6 gap-y-8 py-10 lg:grid-cols-12 lg:gap-8">
         {/* brand + newsletter */}
         <div className="col-span-2 lg:col-span-4">
           <Link to="/" aria-label="Kridhya by Devanshi — home"><Logo /></Link>
-          <p className="mt-4 max-w-xs text-[13px] leading-relaxed text-ivory/60">
+          <p className="mt-4 max-w-xs text-[15px] leading-relaxed text-ivory/60">
             Thoughtfully designed jewellery for everyday elegance, meaningful gifting and the moments that matter.
           </p>
           <form
@@ -32,7 +32,7 @@ export default function Footer() {
               if (email) setSent(true)
             }}
           >
-            <label htmlFor="newsletter" className="text-[11px] font-medium uppercase tracking-[0.2em] text-gold">The Kridhya Letter</label>
+            <label htmlFor="newsletter" className="text-[13px] font-medium uppercase tracking-[0.2em] text-gold">The Kridhya Letter</label>
             <div className="mt-2 flex border-b border-ivory/25 focus-within:border-gold">
               <input
                 id="newsletter"
@@ -41,13 +41,13 @@ export default function Footer() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Your email address"
-                className="h-10 min-w-0 flex-1 bg-transparent text-[13px] text-ivory placeholder:text-ivory/40 focus:outline-none"
+                className="h-10 min-w-0 flex-1 bg-transparent text-[15px] text-ivory placeholder:text-ivory/40 focus:outline-none"
               />
               <button type="submit" className="inline-flex h-10 w-10 items-center justify-center text-gold hover:text-gold-light" aria-label="Subscribe">
                 <IconArrow size={15} />
               </button>
             </div>
-            <p role="status" className="mt-2 h-4 text-[12px] text-gold-light">{sent ? 'Thank you — you’re on the list.' : ''}</p>
+            <p role="status" className="mt-2 h-4 text-[14px] text-gold-light">{sent ? 'Thank you — you’re on the list.' : ''}</p>
           </form>
         </div>
 
@@ -83,7 +83,7 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-ivory/10">
-        <div className="container-site flex flex-col gap-2 py-5 text-[12px] text-ivory/45 sm:flex-row sm:items-center sm:justify-between">
+        <div className="container-site flex flex-col gap-2 py-5 text-[14px] text-ivory/45 sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} Kridhya by Devanshi. All rights reserved.</p>
           <p>Prices shown are indicative in this preview.</p>
         </div>
@@ -95,8 +95,8 @@ export default function Footer() {
 function FooterCol({ title, className = '', children }) {
   return (
     <div className={className}>
-      <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-gold">{title}</p>
-      <ul className="mt-2 text-[14px] sm:mt-4 sm:space-y-2.5 sm:text-[13px]">{children}</ul>
+      <p className="text-[13px] font-medium uppercase tracking-[0.2em] text-gold">{title}</p>
+      <ul className="mt-2 text-[16px] sm:mt-4 sm:space-y-2.5 sm:text-[15px]">{children}</ul>
     </div>
   )
 }

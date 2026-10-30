@@ -20,7 +20,19 @@ export const NAV = [
   { label: 'Our Story', to: '/our-story' },
   { label: 'About', to: '/about' },
   { label: 'Journal', to: '/blog' },
+  { label: 'Contact', to: '/contact' },
 ]
+
+// Contact details shown on the Contact page and Corporate Gifting enquiry block.
+// Phone/WhatsApp mirrors WHATSAPP_NUMBER above. PENDING: confirm email, Instagram handle and studio hours with the client.
+export const CONTACT = {
+  phoneDisplay: '+91 98869 21568',
+  phoneHref: 'tel:+919886921568',
+  email: 'hello@kridhyabydevanshi.com',
+  instagram: { handle: '@kridhyabydevanshi', href: 'https://instagram.com/' },
+  website: 'kridhyabydevanshi.com',
+  hours: 'Monday – Saturday, 10 am – 7 pm IST',
+}
 
 export const formatPrice = (n) =>
   new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(n)

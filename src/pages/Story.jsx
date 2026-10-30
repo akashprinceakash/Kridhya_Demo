@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { PageHero } from '../components/ui'
+import { HeroIndex, PageHero } from '../components/ui'
 import { ExpandFrame, FadeUp, ParallaxImage, ParallaxLayer } from '../components/motion'
 import { IMG } from '../data/images'
 import { IconArrow } from '../components/Icons'
@@ -11,9 +11,31 @@ export default function Story() {
   useDocumentMeta('Our Story | Kridhya by Devanshi', 'The story behind Kridhya by Devanshi — jewellery for the moments that matter.')
   return (
     <>
-      <PageHero eyebrow="Our Story" title="Small details, lasting meaning." image={IMG.womanWearing.src} imageAlt={IMG.womanWearing.alt} position="65% 30%" detail={IMG.designSketch.src} detailAlt={IMG.designSketch.alt} />
+      <PageHero
+        eyebrow="Our Story"
+        title="Small details, lasting meaning."
+        intro="How a simple belief — that jewellery can carry the moments we want to keep close — became Kridhya."
+        image={IMG.womanWearing.src}
+        imageAlt={IMG.womanWearing.alt}
+        position="65% 30%"
+        detail={IMG.designSketch.src}
+        detailAlt={IMG.designSketch.alt}
+      >
+        <div className="mt-8 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap">
+          <a href="#beginning" className="btn btn-gold font-semibold">Read our story</a>
+          <Link to="/about#founder" className="btn btn-outline-light font-semibold">Meet the founder</Link>
+        </div>
+        <HeroIndex
+          items={[
+            { label: 'I · The beginning', href: '#beginning' },
+            { label: 'II · The design', href: '#design' },
+            { label: 'III · Your story', href: '#your-story' },
+          ]}
+        />
+      </PageHero>
 
       <Chapter
+        id="beginning"
         n="I"
         label="The beginning"
         title="Kridhya began with a simple belief"
@@ -25,14 +47,15 @@ export default function Story() {
       />
 
       <ExpandFrame src={IMG.heroBanner.src} alt={IMG.heroBanner.alt} placeholder className="bg-wine-950 text-ivory">
-        <div className="container-site flex min-h-[64svh] items-center py-16">
-          <FadeUp as="blockquote" className="max-w-md font-display text-[clamp(1.75rem,3.2vw,2.6rem)] italic leading-tight">
+        <div className="container-site flex min-h-[52svh] items-center py-10">
+          <FadeUp as="blockquote" className="max-w-md font-display text-[clamp(calc(1.75rem_+_2px),calc(3.2vw_+_2px),calc(2.6rem_+_2px))] italic leading-tight">
             “Jewellery is more than something we wear.”
           </FadeUp>
         </div>
       </ExpandFrame>
 
       <Chapter
+        id="design"
         n="II"
         label="The design"
         title="Guided by symbols that last"
@@ -44,7 +67,7 @@ export default function Story() {
         ]}
       />
 
-      <section className="section grain relative bg-wine-900 text-ivory">
+      <section id="your-story" className="section grain relative scroll-mt-6 bg-wine-900 text-ivory">
         <div className="container-site grid items-center gap-10 md:grid-cols-12">
           <div className="md:col-span-5">
             <ParallaxImage src={IMG.modelPortrait.src} alt={IMG.modelPortrait.alt} placeholder ratio="4/5" strength={8} />
@@ -52,7 +75,7 @@ export default function Story() {
           <div className="md:col-span-6 md:col-start-7">
             <FadeUp as="p" className="eyebrow text-gold">III · Your story</FadeUp>
             <FadeUp as="h2" delay={0.05} className="h-section mt-3">Made to be part of your story</FadeUp>
-            <FadeUp as="p" delay={0.1} className="mt-4 max-w-[54ch] text-[15.5px] leading-[1.8] text-ivory/75">
+            <FadeUp as="p" delay={0.1} className="mt-4 max-w-[54ch] text-[17.5px] leading-[1.8] text-ivory/75">
               Whether it’s a gift chosen for someone you love, or a piece you choose for yourself, we hope Kridhya becomes part of the moments you remember.
             </FadeUp>
             <FadeUp delay={0.15} className="mt-7 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap">
@@ -66,15 +89,15 @@ export default function Story() {
   )
 }
 
-function Chapter({ n, label, title, paras, img, flip = false }) {
+function Chapter({ id, n, label, title, paras, img, flip = false }) {
   return (
-    <section className="section bg-ivory">
+    <section id={id} className="section scroll-mt-6 bg-ivory">
       <article className="container-site grid items-center gap-10 md:grid-cols-12">
         <div className={`md:col-span-6 ${flip ? 'md:order-2 md:col-start-7' : ''}`}>
           <FadeUp as="p" className="eyebrow text-gold-deep">{n} · {label}</FadeUp>
           <FadeUp as="h2" delay={0.05} className="h-section mt-3">{title}</FadeUp>
           {paras.map((p, i) => (
-            <FadeUp key={i} as="p" delay={0.1 + i * 0.05} className="mt-4 max-w-[58ch] text-[15.5px] leading-[1.8] text-wine-900/75">{p}</FadeUp>
+            <FadeUp key={i} as="p" delay={0.1 + i * 0.05} className="mt-4 max-w-[58ch] text-[17.5px] leading-[1.8] text-wine-900/75">{p}</FadeUp>
           ))}
         </div>
         <ParallaxLayer distance={30} className={`md:col-span-5 ${flip ? 'md:order-1' : 'md:col-start-8'}`}>

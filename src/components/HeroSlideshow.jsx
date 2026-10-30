@@ -159,7 +159,7 @@ export default function HeroSlideshow() {
               >
                 <span className="h-px w-6 bg-gold" /> {slide.eyebrow}
               </motion.p>
-              <h1 className="mt-4 text-[clamp(2.4rem,5.6vw,4.6rem)] leading-[1.02]">
+              <h1 className="mt-4 text-[clamp(calc(2.4rem_+_2px),calc(5.6vw_+_2px),calc(4.6rem_+_2px))] leading-[1.02]">
                 {slide.title.map((line, i) => (
                   <motion.span
                     key={line}
@@ -210,8 +210,8 @@ export default function HeroSlideshow() {
                     />
                   )}
                 </span>
-                <span className={`font-display text-sm italic transition-colors ${i === index ? 'text-gold' : 'text-ivory/45 group-hover:text-ivory/80'}`}>0{i + 1}</span>
-                <span className={`hidden text-[10.5px] uppercase tracking-[0.18em] transition-colors md:inline ${i === index ? 'text-ivory' : 'text-ivory/45 group-hover:text-ivory/80'}`}>{s.label}</span>
+                <span className={`font-display text-[16px] italic transition-colors ${i === index ? 'text-gold' : 'text-ivory/45 group-hover:text-ivory/80'}`}>0{i + 1}</span>
+                <span className={`hidden text-[12.5px] uppercase tracking-[0.18em] transition-colors md:inline ${i === index ? 'text-ivory' : 'text-ivory/45 group-hover:text-ivory/80'}`}>{s.label}</span>
               </button>
             ))}
           </div>
