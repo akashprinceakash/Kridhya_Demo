@@ -1,7 +1,7 @@
 // Brand-wide configuration. Items marked PENDING need client confirmation before launch.
 
 // PENDING: replace with the verified business WhatsApp number (country code, digits only).
-export const WHATSAPP_NUMBER = '910000000000'
+export const WHATSAPP_NUMBER = '919886921568'
 
 export const WHATSAPP_MESSAGES = {
   general: 'Hello Kridhya by Devanshi, I would love some help choosing a piece. Could you assist me?',

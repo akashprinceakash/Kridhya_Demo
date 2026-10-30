@@ -72,7 +72,7 @@ export default function Shop() {
       </section>
 
       {/* filter bar */}
-      <div className="sticky top-0 z-30 border-y border-wine-900/10 bg-ivory/95 backdrop-blur-md">
+      <div className="sticky top-0 z-30 border-y border-wine-900/10 bg-ivory/95 backdrop-blur-md transition-[top] duration-[450ms] ease-luxe [html[data-header=shown]_&]:top-[80px] sm:[html[data-header=shown]_&]:top-[84px]">
         <div className="container-site flex flex-col gap-2 py-2 lg:flex-row lg:items-center lg:justify-between">
           <nav aria-label="Categories" className="scrollbar-none -mx-5 flex gap-5 overflow-x-auto px-5 sm:mx-0 sm:px-0">
             {[{ slug: 'all', name: 'All' }, ...CATEGORIES].map((c) => {

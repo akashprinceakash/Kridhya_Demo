@@ -52,17 +52,19 @@ export default function Header() {
   const wide = useWide()
   const { count, setOpen } = useCart()
   const [menu, setMenu] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
   const [hidden, setHidden] = useState(false)
   const { scrollY } = useScroll()
 
   useMotionValueEvent(scrollY, 'change', (y) => {
     const prev = scrollY.getPrevious() ?? 0
-    setScrolled(y > 24)
     setHidden(y > 320 && y > prev)
   })
 
   useEffect(() => setMenu(false), [pathname])
+  // Expose header visibility so sticky page bars (e.g. shop filters) can tuck in beneath it.
+  useEffect(() => {
+    document.documentElement.dataset.header = hidden && !menu ? 'hidden' : 'shown'
+  }, [hidden, menu])
   useEffect(() => {
     document.body.style.overflow = menu ? 'hidden' : ''
     const onKey = (e) => e.key === 'Escape' && setMenu(false)
@@ -70,10 +72,9 @@ export default function Header() {
     return () => window.removeEventListener('keydown', onKey)
   }, [menu])
 
-  // Transparent over the page top, sitting slightly below the edge; gains a soft tinted backdrop only after scrolling.
+  // Always transparent, sitting slightly below the edge; the glass navbar pill carries its own backdrop.
   const darkTop = DARK_TOP.includes(pathname)
   const tone = darkTop ? 'text-ivory' : 'text-wine-900'
-  const bar = !scrolled ? 'border-transparent bg-transparent' : darkTop ? 'border-gold/15 bg-wine-950/80 backdrop-blur-md' : 'border-wine-900/10 bg-ivory/85 backdrop-blur-md'
 
   return (
     <>
@@ -83,7 +84,7 @@ export default function Header() {
         className="fixed inset-x-0 top-3 z-50 sm:top-4"
       >
         <div className="container-site">
-          <div className={`relative flex h-[62px] items-center justify-between gap-4 rounded-[6px] border px-3 transition-colors duration-500 sm:px-5 ${bar} ${tone}`}>
+          <div className={`relative flex h-[62px] items-center justify-between gap-4 px-3 sm:px-5 ${tone}`}>
             <Link to="/" aria-label="Kridhya by Devanshi — home" className="shrink-0">
               <Logo />
             </Link>
