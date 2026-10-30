@@ -1,0 +1,82 @@
+// Sample journal entries for template preview only — replace via WordPress Posts > Add New.
+// Each post carries the SEO fields the CMS should expose (title, description, slug, canonical, focus keyphrase).
+
+export const POSTS = [
+  {
+    slug: 'how-to-layer-fine-necklaces',
+    title: 'The Quiet Art of Layering Fine Necklaces',
+    excerpt: 'Three lengths, one mood. A simple framework for layering delicate chains so each piece still has room to breathe.',
+    category: 'Styling',
+    date: '2026-10-22',
+    readTime: '4 min read',
+    cover: '/images/editorial/double-strand-rose-satin.webp',
+    coverAlt: 'Rose gold double strand necklace on satin',
+    seo: { title: 'How to Layer Fine Necklaces | Kridhya Journal', description: 'A simple guide to layering delicate necklaces by length, finish and focal point.', focus: 'layering necklaces' },
+    body: [
+      { h2: 'Start with a focal point' },
+      { p: 'Every layered look needs one piece that leads. Choose a pendant with a clear silhouette — an infinity drop or a heart — and let everything else support it.' },
+      { h2: 'Vary the lengths' },
+      { p: 'Spacing chains roughly five centimetres apart keeps them from tangling and lets each one read clearly. A collarbone length, a princess length and a longer lariat is an easy starting trio.' },
+      { img: '/images/editorial/double-strand-gold-satin.webp', caption: 'A double strand does the layering for you.' },
+      { h3: 'Mixing finishes' },
+      { p: 'Gold, rose gold and silver can live together when one finish dominates. Repeat the dominant tone in your earrings or rings to tie the look together.' },
+      { h2: 'Keep it personal' },
+      { p: 'The best layers tell a story — a gift, a milestone, a small reminder. Build slowly, and add pieces that mean something to you.' },
+    ],
+  },
+  {
+    slug: 'caring-for-your-jewellery',
+    title: 'A Gentle Guide to Caring for Your Jewellery',
+    excerpt: 'Small habits that keep fine pieces bright — from storage and cleaning to the order you get dressed in.',
+    category: 'Care',
+    date: '2026-10-12',
+    readTime: '3 min read',
+    cover: '/images/editorial/gift-box.webp',
+    coverAlt: 'Ring in a velvet gift box',
+    seo: { title: 'Jewellery Care Guide | Kridhya Journal', description: 'Simple everyday tips to store, clean and protect your fine jewellery.', focus: 'jewellery care' },
+    body: [
+      { h2: 'Last on, first off' },
+      { p: 'Put jewellery on after perfume, lotion and hairspray, and take it off before washing up, swimming or exercising.' },
+      { h2: 'Store pieces separately' },
+      { p: 'Keep each piece in its own pouch or compartment so harder stones don’t scratch softer metals and fine chains don’t knot.' },
+      { h3: 'Cleaning' },
+      { p: 'Wipe with a soft, dry cloth after wearing. For a deeper clean, ask our team for guidance specific to your piece.' },
+    ],
+  },
+  {
+    slug: 'meaning-of-the-infinity-symbol',
+    title: 'Endless Lines: Why the Infinity Motif Endures',
+    excerpt: 'A continuous loop with no beginning and no end — why this simple shape has become a language for lasting bonds.',
+    category: 'Stories',
+    date: '2026-09-28',
+    readTime: '5 min read',
+    cover: '/images/products/the-lemniscate-5dd8e835.webp',
+    coverAlt: 'Gold infinity necklace with a blush drop',
+    seo: { title: 'The Meaning of the Infinity Symbol | Kridhya Journal', description: 'Exploring why the infinity motif remains a favourite in meaningful jewellery.', focus: 'infinity symbol meaning' },
+    body: [
+      { h2: 'A line that never ends' },
+      { p: 'Drawn in a single stroke, the infinity shape has long been read as a symbol of continuity — of love, friendship and promises kept.' },
+      { h2: 'Why it works in jewellery' },
+      { p: 'Its balance makes it endlessly wearable: symmetrical enough for everyday, expressive enough to mark a moment.' },
+    ],
+  },
+  {
+    slug: 'corporate-gifting-guide',
+    title: 'Thoughtful Corporate Gifting, Made Personal',
+    excerpt: 'How to choose jewellery gifts for teams, clients and celebrations that feel considered rather than corporate.',
+    category: 'Gifting',
+    date: '2026-09-15',
+    readTime: '4 min read',
+    cover: '/images/editorial/collection-still-life.webp',
+    coverAlt: 'Jewellery set displayed on stone',
+    seo: { title: 'Corporate Jewellery Gifting Guide | Kridhya Journal', description: 'Ideas for choosing meaningful jewellery gifts for teams and clients.', focus: 'corporate gifting jewellery' },
+    body: [
+      { h2: 'Start with the occasion' },
+      { p: 'Festive season, milestones, onboarding or client appreciation — the moment shapes the piece. Understated designs travel best across tastes.' },
+      { h2: 'Plan early' },
+      { p: 'Share your timelines and quantities early so our team can recommend pieces and presentation options.' },
+    ],
+  },
+]
+
+export const getPost = (slug) => POSTS.find((p) => p.slug === slug)

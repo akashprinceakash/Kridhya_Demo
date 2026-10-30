@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "gradient-text",
+        "value": "*",
+        "files": [
+          "src/index.css"
+        ],
+        "createdAt": "2026-10-30T04:27:04.966Z",
+        "reason": "agent decision: metallic gold-foil treatment is domain-appropriate for a jewellery brand, used on a single italic hero word only"
+      }
+    ]
+  }
+}
