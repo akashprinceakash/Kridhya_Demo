@@ -176,7 +176,7 @@ export default function HeroSlideshow() {
               </h1>
             </motion.div>
           </AnimatePresence>
-          <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.8, ease: EASE }} className="mt-8 flex flex-col gap-2.5 sm:flex-row">
+          <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.8, ease: EASE }} className="mt-8 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap">
             <Link to="/shop" className="btn btn-gold group">
               Explore the Collection <IconArrow size={14} className="transition-transform group-hover:translate-x-1" />
             </Link>

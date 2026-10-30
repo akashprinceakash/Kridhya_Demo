@@ -32,7 +32,7 @@ export default function Footer() {
               if (email) setSent(true)
             }}
           >
-            <label htmlFor="newsletter" className="text-[10.5px] font-medium uppercase tracking-[0.2em] text-gold">The Kridhya Letter</label>
+            <label htmlFor="newsletter" className="text-[11px] font-medium uppercase tracking-[0.2em] text-gold">The Kridhya Letter</label>
             <div className="mt-2 flex border-b border-ivory/25 focus-within:border-gold">
               <input
                 id="newsletter"
@@ -64,21 +64,21 @@ export default function Footer() {
 
         <FooterCol title="Contact" className="col-span-2 sm:col-span-1 lg:col-span-3">
           <li>
-            <a href={whatsappLink(WHATSAPP_MESSAGES.general)} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-ivory/70 transition-colors hover:text-gold-light">
+            <a href={whatsappLink(WHATSAPP_MESSAGES.general)} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 py-2.5 text-ivory/70 transition-colors hover:text-gold-light sm:py-0">
               <IconWhatsApp size={14} /> <span className="link-underline">Chat on WhatsApp</span>
             </a>
           </li>
           <li>
-            <a href={whatsappLink(WHATSAPP_MESSAGES.gifting)} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-ivory/70 transition-colors hover:text-gold-light">
+            <a href={whatsappLink(WHATSAPP_MESSAGES.gifting)} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 py-2.5 text-ivory/70 transition-colors hover:text-gold-light sm:py-0">
               <IconWhatsApp size={14} /> <span className="link-underline">Bulk &amp; gifting enquiries</span>
             </a>
           </li>
           <li>
-            <a href="https://instagram.com/" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-ivory/70 transition-colors hover:text-gold-light">
+            <a href="https://instagram.com/" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 py-2.5 text-ivory/70 transition-colors hover:text-gold-light sm:py-0">
               <IconInstagram size={14} /> <span className="link-underline">Instagram</span>
             </a>
           </li>
-          <li className="pt-1 text-ivory/45">kridhyabydevanshi.com</li>
+          <li className="py-2 text-ivory/45 sm:py-0 sm:pt-1">kridhyabydevanshi.com</li>
         </FooterCol>
       </div>
 
@@ -95,8 +95,8 @@ export default function Footer() {
 function FooterCol({ title, className = '', children }) {
   return (
     <div className={className}>
-      <p className="text-[10.5px] font-medium uppercase tracking-[0.2em] text-gold">{title}</p>
-      <ul className="mt-4 space-y-2.5 text-[13px]">{children}</ul>
+      <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-gold">{title}</p>
+      <ul className="mt-2 text-[14px] sm:mt-4 sm:space-y-2.5 sm:text-[13px]">{children}</ul>
     </div>
   )
 }
@@ -104,7 +104,7 @@ function FooterCol({ title, className = '', children }) {
 function FooterLink({ to, children }) {
   return (
     <li>
-      <Link to={to} className="link-underline text-ivory/70 transition-colors hover:text-gold-light">{children}</Link>
+      <Link to={to} className="link-underline inline-block py-2.5 text-ivory/70 transition-colors hover:text-gold-light sm:py-0">{children}</Link>
     </li>
   )
 }

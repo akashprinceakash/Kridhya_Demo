@@ -90,7 +90,7 @@ export default function About() {
         <div className="container-site relative">
           <Ornament />
           <FadeUp as="h2" className="h-section mx-auto mt-6 max-w-xl">Find a piece that speaks to your story.</FadeUp>
-          <FadeUp delay={0.1} className="mt-8 flex flex-col justify-center gap-2.5 sm:flex-row">
+          <FadeUp delay={0.1} className="mt-8 flex flex-col justify-center gap-2.5 sm:flex-row sm:flex-wrap">
             <Link to="/shop" className="btn btn-gold">Explore the collection <IconArrow size={14} /></Link>
             <a href={whatsappLink(WHATSAPP_MESSAGES.general)} target="_blank" rel="noreferrer" className="btn btn-outline-light"><IconWhatsApp size={16} /> Contact the team</a>
           </FadeUp>

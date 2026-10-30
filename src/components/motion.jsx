@@ -106,6 +106,8 @@ export function ExpandFrame({ src, alt, children, className = '', position = 'ce
           className="h-full w-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-wine-950/85 via-wine-950/50 to-wine-950/10" />
+        {/* narrow screens: copy spans the full width, so also darken from the bottom */}
+        <div className="absolute inset-0 bg-gradient-to-t from-wine-950/90 via-wine-950/55 to-wine-950/10 md:hidden" />
       </motion.div>
       <div className="relative">{children}</div>
     </section>

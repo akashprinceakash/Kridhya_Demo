@@ -177,7 +177,7 @@ export default function PanoramicSpreadHero({
   const textOpacity = useTransform(progress, [0.4, 0.9], [0, 1]);
 
   return (
-    <section ref={wrapRef} className={`relative w-full bg-wine-900 text-ivory ${reduce ? "h-[100svh]" : "h-[300vh]"}`} aria-label="Collection preview">
+    <section ref={wrapRef} className={`relative w-full bg-wine-900 text-ivory ${reduce ? "h-[100svh]" : "h-[220vh] md:h-[300vh]"}`} aria-label="Collection preview">
       <div className="sticky top-0 flex h-[100svh] w-full items-center justify-center overflow-hidden" style={{ perspective: "1200px" }}>
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(201,164,106,0.14),transparent_60%)]" />
 

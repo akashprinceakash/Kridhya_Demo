@@ -72,12 +72,12 @@ export default function Shop() {
       </section>
 
       {/* filter bar */}
-      <div className="sticky top-0 z-30 border-y border-wine-900/10 bg-ivory/95 backdrop-blur-md transition-[top] duration-[450ms] ease-luxe [html[data-header=shown]_&]:top-[80px] sm:[html[data-header=shown]_&]:top-[84px]">
+      <div className="relative z-30 border-y border-wine-900/10 bg-ivory/95 backdrop-blur-md transition-[top] md:sticky md:top-0 duration-[450ms] ease-luxe [html[data-header=shown]_&]:top-[80px] sm:[html[data-header=shown]_&]:top-[84px]">
         <div className="container-site flex flex-col gap-2 py-2 lg:flex-row lg:items-center lg:justify-between">
           <nav aria-label="Categories" className="scrollbar-none -mx-5 flex gap-5 overflow-x-auto px-5 sm:mx-0 sm:px-0">
             {[{ slug: 'all', name: 'All' }, ...CATEGORIES].map((c) => {
               const active = category === c.slug
-              const cls = `min-h-[40px] shrink-0 border-b text-[11px] uppercase tracking-[0.16em] transition-colors ${active ? 'border-wine-900 text-wine-900' : 'border-transparent text-wine-900/55 hover:text-wine-900'}`
+              const cls = `min-h-[44px] min-w-[44px] shrink-0 border-b text-center text-[11px] uppercase tracking-[0.16em] transition-colors ${active ? 'border-wine-900 text-wine-900' : 'border-transparent text-wine-900/55 hover:text-wine-900'}`
               const inner = c.name
               const href = catHref(c.slug)
               return href ? (
@@ -89,7 +89,7 @@ export default function Shop() {
           </nav>
 
           <div className="flex flex-wrap items-center gap-2 sm:gap-3">
-            <label className="relative flex min-h-[40px] basis-full items-center sm:basis-auto">
+            <label className="relative flex min-h-[44px] basis-full items-center sm:basis-auto">
               <span className="sr-only">Search jewellery</span>
               <IconSearch size={16} className="pointer-events-none absolute left-3 text-wine-900/50" />
               <input
@@ -97,7 +97,7 @@ export default function Shop() {
                 value={q}
                 onChange={(e) => setParam('q', e.target.value)}
                 placeholder="Search"
-                className="h-10 w-full border border-wine-900/15 bg-transparent pl-9 pr-3 text-[14px] placeholder:text-wine-900/45 focus:border-wine-700 focus:outline-none sm:w-44"
+                className="h-11 w-full border border-wine-900/15 bg-transparent pl-9 pr-3 text-[14px] placeholder:text-wine-900/45 focus:border-wine-700 focus:outline-none sm:w-44"
               />
             </label>
             <div className="flex items-center gap-1.5" role="group" aria-label="Filter by finish">
@@ -107,7 +107,7 @@ export default function Shop() {
                   type="button"
                   aria-pressed={finish === f}
                   onClick={() => setParam('finish', finish === f ? '' : f)}
-                  className={`inline-flex h-10 items-center gap-2 border px-3 text-[12px] transition-colors ${finish === f ? 'border-wine-900 bg-wine-900 text-ivory' : 'border-wine-900/15 hover:border-wine-900/40'}`}
+                  className={`inline-flex h-11 min-w-[44px] items-center justify-center gap-2 border px-3 text-[12px] transition-colors ${finish === f ? 'border-wine-900 bg-wine-900 text-ivory' : 'border-wine-900/15 hover:border-wine-900/40'}`}
                 >
                   <FinishDot finish={f} />
                   <span className="hidden sm:inline">{f}</span>
@@ -120,7 +120,7 @@ export default function Shop() {
               <select
                 value={sort}
                 onChange={(e) => setParam('sort', e.target.value)}
-                className="h-10 cursor-pointer appearance-none border border-wine-900/15 bg-transparent pl-3 pr-9 text-[13px] focus:border-wine-700 focus:outline-none"
+                className="h-11 cursor-pointer appearance-none border border-wine-900/15 bg-transparent pl-3 pr-9 text-[13px] focus:border-wine-700 focus:outline-none"
               >
                 {Object.entries(SORTS).map(([k, v]) => <option key={k} value={k}>{v.label}</option>)}
               </select>
@@ -167,7 +167,7 @@ export default function Shop() {
                   onClick={() => setParam('page', String(n))}
                   aria-current={n === current ? 'page' : undefined}
                   aria-label={`Page ${n}`}
-                  className={`h-10 w-10 font-display text-lg transition-colors ${n === current ? 'bg-wine-900 text-ivory' : 'border border-wine-900/15 hover:border-wine-900'}`}
+                  className={`h-11 w-11 font-display text-lg transition-colors ${n === current ? 'bg-wine-900 text-ivory' : 'border border-wine-900/15 hover:border-wine-900'}`}
                 >
                   {n}
                 </button>

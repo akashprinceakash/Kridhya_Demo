@@ -21,7 +21,7 @@ export default function Logo({ className = '', compact = false }) {
       <LotusMark className="h-7 w-7 shrink-0 text-gold" />
       <span className="flex flex-col leading-none">
         <span className="font-display text-[18px] font-normal tracking-[0.34em]">KRIDHYA</span>
-        {!compact && <span className="mt-1 font-sans text-[7.5px] font-medium tracking-[0.4em] text-gold">BY DEVANSHI</span>}
+        {!compact && <span className="mt-1 font-sans text-[8.5px] font-medium tracking-[0.36em] text-gold">BY DEVANSHI</span>}
       </span>
       <span className="sr-only">Kridhya by Devanshi — home</span>
     </span>

@@ -128,7 +128,7 @@ function Hero() {
           <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4, duration: 1, ease: EASE }} className="mt-5 max-w-md text-[15px] leading-relaxed text-ivory/75">
             Thoughtfully designed jewellery to celebrate your people — for festive seasons, milestones, clients and celebrations.
           </motion.p>
-          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.55, duration: 1, ease: EASE }} className="mt-8 flex flex-col gap-2.5 sm:flex-row">
+          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.55, duration: 1, ease: EASE }} className="mt-8 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap">
             <a href={whatsappLink(WHATSAPP_MESSAGES.gifting)} target="_blank" rel="noreferrer" className="btn btn-gold"><IconWhatsApp size={16} /> Enquire on WhatsApp</a>
             <a href="#enquire" className="btn btn-outline-light">Send an enquiry</a>
           </motion.div>

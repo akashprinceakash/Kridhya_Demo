@@ -91,7 +91,7 @@ function Bestsellers() {
               role="tab"
               aria-selected={tab === t.slug}
               onClick={() => setTab(t.slug)}
-              className={`-mb-px min-h-[44px] shrink-0 border-b text-[11px] uppercase tracking-[0.18em] transition-colors ${tab === t.slug ? 'border-wine-900 text-wine-900' : 'border-transparent text-wine-900/55 hover:text-wine-900'}`}
+              className={`-mb-px min-h-[44px] min-w-[44px] shrink-0 border-b text-center text-[11px] uppercase tracking-[0.18em] transition-colors ${tab === t.slug ? 'border-wine-900 text-wine-900' : 'border-transparent text-wine-900/55 hover:text-wine-900'}`}
             >
               {t.name}
             </button>
@@ -157,7 +157,7 @@ function Gifting() {
           <FadeUp as="p" delay={0.1} className="mt-4 text-[15px] leading-relaxed text-ivory/75">
             Celebrate teams, clients and milestones with jewellery chosen to be kept. Tell us about your occasion and we’ll share the options available.
           </FadeUp>
-          <FadeUp delay={0.15} className="mt-7 flex flex-col gap-2.5 sm:flex-row">
+          <FadeUp delay={0.15} className="mt-7 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap">
             <Link to="/corporate-gifting" className="btn btn-gold">Explore gifting <IconArrow size={14} /></Link>
             <a href={whatsappLink(WHATSAPP_MESSAGES.gifting)} target="_blank" rel="noreferrer" className="btn btn-outline-light"><IconWhatsApp size={16} /> Enquire</a>
           </FadeUp>

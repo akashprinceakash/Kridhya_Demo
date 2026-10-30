@@ -24,7 +24,8 @@ let lenis
 function useSmoothScroll() {
   const reduce = useReducedMotion()
   useEffect(() => {
-    if (reduce) return
+    // Touch devices already have native momentum scrolling — skip the extra rAF loop there.
+    if (reduce || window.matchMedia('(pointer: coarse)').matches) return
     lenis = new Lenis({ lerp: 0.1, smoothWheel: true })
     let id
     const raf = (t) => {

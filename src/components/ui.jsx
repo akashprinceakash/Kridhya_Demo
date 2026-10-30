@@ -54,26 +54,26 @@ export function ProductCard({ product, priority = false }) {
             <img src={second} alt="" loading="lazy" decoding="async" className="absolute inset-0 h-full w-full object-cover opacity-0 mix-blend-multiply transition-opacity duration-700 ease-luxe group-hover:opacity-100" />
           )}
           {product.badge && (
-            <span className="absolute left-2.5 top-2.5 bg-ivory/90 px-2 py-0.5 text-[9.5px] font-medium uppercase tracking-[0.18em] text-wine-900">{product.badge}</span>
+            <span className="absolute left-2.5 top-2.5 bg-ivory/90 px-2 py-0.5 text-[10.5px] font-medium uppercase tracking-[0.16em] text-wine-900">{product.badge}</span>
           )}
         </div>
       </Link>
       <button
         type="button"
         onClick={() => add(product, product.finishes[0])}
-        className="absolute right-2.5 top-2.5 inline-flex h-9 w-9 items-center justify-center bg-wine-900/90 text-ivory transition-all duration-500 ease-luxe hover:bg-gold hover:text-wine-950 focus-visible:opacity-100 [@media(hover:hover)]:opacity-0 [@media(hover:hover)]:group-hover:opacity-100"
+        className="absolute right-2 top-2 inline-flex h-11 w-11 items-center justify-center bg-wine-900/90 text-ivory transition-all duration-500 ease-luxe hover:bg-gold hover:text-wine-950 focus-visible:opacity-100 [@media(hover:hover)]:opacity-0 [@media(hover:hover)]:group-hover:opacity-100"
         aria-label={`Add ${product.name} to bag`}
       >
         <IconBag size={16} />
       </button>
       <div className="mt-3 flex items-start justify-between gap-3">
         <div className="min-w-0">
-          <p className="text-[10px] uppercase tracking-[0.18em] text-gold-deep">{getCategory(product.category)?.name}</p>
+          <p className="text-[11px] uppercase tracking-[0.16em] text-gold-deep">{getCategory(product.category)?.name}</p>
           <h3 className="mt-0.5 line-clamp-2 font-display text-[17px] leading-snug sm:text-[18px]">
             <Link to={`/product/${product.slug}`}>{product.name}</Link>
           </h3>
         </div>
-        <p className="shrink-0 pt-3.5 text-[13.5px] font-medium">{formatPrice(product.price)}</p>
+        <p className="shrink-0 pt-4 text-[14px] font-medium">{formatPrice(product.price)}</p>
       </div>
     </motion.article>
   )
@@ -137,10 +137,10 @@ export function PageHero({ eyebrow, title, intro, image, imageAlt = '', position
 export function Breadcrumbs({ items }) {
   return (
     <nav aria-label="Breadcrumb">
-      <ol className="flex flex-wrap items-center gap-1.5 text-[10.5px] uppercase tracking-[0.16em] text-wine-900/55">
+      <ol className="flex flex-wrap items-center gap-1.5 text-[11px] uppercase tracking-[0.16em] text-wine-900/55">
         {items.map((it, i) => (
           <li key={i} className="flex items-center gap-1.5">
-            {it.to ? <Link to={it.to} className="link-underline hover:text-gold-deep">{it.label}</Link> : <span aria-current="page" className="text-wine-900">{it.label}</span>}
+            {it.to ? <Link to={it.to} className="link-underline inline-block py-2.5 hover:text-gold-deep">{it.label}</Link> : <span aria-current="page" className="text-wine-900">{it.label}</span>}
             {i < items.length - 1 && <IconChevron size={11} />}
           </li>
         ))}

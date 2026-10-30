@@ -10,7 +10,7 @@ export default function NotFound() {
         <LotusMark className="mx-auto h-12 w-12 text-gold" />
         <h1 className="h-display mt-6">This page has <em className="text-gold-light">wandered off.</em></h1>
         <p className="mx-auto mt-6 max-w-md text-ivory/75">The page you’re looking for doesn’t exist or has moved.</p>
-        <div className="mt-10 flex flex-col justify-center gap-3 sm:flex-row">
+        <div className="mt-10 flex flex-col justify-center gap-3 sm:flex-row sm:flex-wrap">
           <Link to="/" className="btn btn-gold">Return home</Link>
           <Link to="/shop" className="btn btn-outline-light">Shop the collection</Link>
         </div>

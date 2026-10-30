@@ -55,7 +55,7 @@ export default function Story() {
             <FadeUp as="p" delay={0.1} className="mt-4 max-w-[54ch] text-[15.5px] leading-[1.8] text-ivory/75">
               Whether it’s a gift chosen for someone you love, or a piece you choose for yourself, we hope Kridhya becomes part of the moments you remember.
             </FadeUp>
-            <FadeUp delay={0.15} className="mt-7 flex flex-col gap-2.5 sm:flex-row">
+            <FadeUp delay={0.15} className="mt-7 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap">
               <Link to="/shop" className="btn btn-gold">Explore the collection <IconArrow size={14} /></Link>
               <Link to="/about" className="btn btn-outline-light">About Kridhya</Link>
             </FadeUp>

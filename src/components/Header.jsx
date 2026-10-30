@@ -34,22 +34,23 @@ function activeIndex(path) {
   return i < 0 ? 0 : i
 }
 
-function useWide() {
-  const q = '(min-width: 1280px)'
-  const [wide, setWide] = useState(() => typeof window !== 'undefined' && window.matchMedia(q).matches)
+function useMedia(q) {
+  const [match, setMatch] = useState(() => typeof window !== 'undefined' && window.matchMedia(q).matches)
   useEffect(() => {
     const m = window.matchMedia(q)
-    const on = () => setWide(m.matches)
+    const on = () => setMatch(m.matches)
     m.addEventListener('change', on)
     return () => m.removeEventListener('change', on)
-  }, [])
-  return wide
+  }, [q])
+  return match
 }
 
 export default function Header() {
   const { pathname } = useLocation()
   const navigate = useNavigate()
-  const wide = useWide()
+  const wide = useMedia('(min-width: 1280px)')
+  // The WebGL pill only mounts where it is shown (tablet and up) — phones use the slide-out menu.
+  const showPill = useMedia('(min-width: 768px)')
   const { count, setOpen } = useCart()
   const [menu, setMenu] = useState(false)
   const [hidden, setHidden] = useState(false)
@@ -81,7 +82,7 @@ export default function Header() {
       <motion.header
         animate={{ y: hidden && !menu ? '-130%' : '0%' }}
         transition={{ duration: 0.45, ease: EASE }}
-        className="fixed inset-x-0 top-3 z-50 sm:top-4"
+        className="fixed inset-x-0 top-[max(0.75rem,env(safe-area-inset-top))] z-50 sm:top-4"
       >
         <div className="container-site">
           <div className={`relative flex h-[62px] items-center justify-between gap-4 px-3 sm:px-5 ${tone}`}>
@@ -90,7 +91,8 @@ export default function Header() {
             </Link>
 
             {/* liquid-glass pill: icons only on tablet / small laptop, labelled from xl */}
-            <div className="absolute left-1/2 hidden -translate-x-1/2 md:block">
+            {showPill && (
+            <div className="absolute left-1/2 -translate-x-1/2">
               <LiquidNavbar
                 items={PILL_ITEMS}
                 active={activeIndex(pathname)}
@@ -99,6 +101,7 @@ export default function Header() {
                 compact={!wide}
               />
             </div>
+            )}
 
           <div className="-mr-2 flex items-center">
             <Link to="/shop" className="hidden h-10 w-10 items-center justify-center hover:text-gold sm:inline-flex" aria-label="Search the shop">
