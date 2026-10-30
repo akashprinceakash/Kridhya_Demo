@@ -42,13 +42,15 @@ const generatePanoramicCards = (images: PanoramicImage[]): Card[] => {
       item,
       z: Math.round(10 - absOffset),
       desktop: {
-        stacked: { x: offset * 1.6, y: offset * -1.6, rotateZ: offset * 2.5, rotateY: 0, scale: 1 },
+        // opening state: a large fan that fills the screen, then shrinks and spreads into the arc
+        stacked: { x: offset * 3.2, y: offset * -1.2, rotateZ: offset * 4, rotateY: 0, scale: 2.05 },
         panoramic: { x: offset * 10.5, y: absOffset * 2.6, rotateZ: offset * 1.2, rotateY: offset * -11, scale: 1 - absOffset * 0.05 },
         size: { w: "15vw", h: "27vh", ml: "-7.5vw", mt: "-13.5vh" },
       },
       mobile: {
-        stacked: { x: offset * 1.5, y: offset * -1.5, rotateZ: offset * 3, rotateY: 0, scale: 1 },
-        panoramic: { x: offset * 11.5, y: absOffset * 4, rotateZ: offset * 2, rotateY: offset * -14, scale: 1 - absOffset * 0.04 },
+        stacked: { x: offset * 2.4, y: offset * -1.2, rotateZ: offset * 4.5, rotateY: 0, scale: 1.6 },
+        // phones: wider, flatter arc so each piece reads (outer cards run off-screen, which fills the width)
+        panoramic: { x: offset * 14, y: absOffset * 4.5, rotateZ: offset * 3, rotateY: offset * -6, scale: 1 - absOffset * 0.07 },
         size: { w: "30vw", h: "21vh", ml: "-15vw", mt: "-10.5vh" },
       },
     };
@@ -95,7 +97,7 @@ function GalleryCard({ card, progress, isMobile }: { card: Card; progress: Motio
   const y = useTransform(yRaw, (v) => `${v}vh`);
   const rotateZ = useTransform(ease, [0, 1], [stacked.rotateZ, panoramic.rotateZ]);
   const rotateY = useTransform(ease, [0, 1], [stacked.rotateY, panoramic.rotateY]);
-  const scale = useTransform(ease, [0, 1], [0.78, panoramic.scale]);
+  const scale = useTransform(ease, [0, 1], [stacked.scale, panoramic.scale]);
 
   return (
     <div className="pointer-events-none absolute left-1/2 top-1/2" style={{ zIndex: z }}>
@@ -162,7 +164,7 @@ export default function PanoramicSpreadHero({
 
   const { scrollYProgress } = useScroll({ target: wrapRef, offset: ["start start", "end end"] });
   const smoothProgress = useSpring(scrollYProgress, PROGRESS_SPRING);
-  const scrubbed = useTransform(smoothProgress, [0.12, 0.8], [0, 1]);
+  const scrubbed = useTransform(smoothProgress, [0.02, 0.78], [0, 1]);
   // Reduced motion: present the finished, spread state with no scroll-driven movement.
   const still = useMotionValue(1);
   const progress = reduce ? still : scrubbed;
@@ -172,9 +174,10 @@ export default function PanoramicSpreadHero({
   const { tiltX, tiltY } = usePointerTilt(spread, !reduce);
 
   // Typography rises into place as the cards unspool
-  const textY = useTransform(progress, [0.2, 1], ["8vh", "-24vh"]);
+  const textY = useTransform(progress, [0.45, 1], ["10vh", "-24vh"]);
   const textScale = useTransform(progress, [0.2, 1], [0.9, 1]);
-  const textOpacity = useTransform(progress, [0.4, 0.9], [0, 1]);
+  // heading waits until the fan has shrunk out of its way, then fades in
+  const textOpacity = useTransform(progress, [0.62, 0.95], [0, 1]);
 
   return (
     <section ref={wrapRef} className={`relative w-full bg-wine-900 text-ivory ${reduce ? "h-[100svh]" : "h-[180vh] md:h-[220vh]"}`} aria-label="Collection preview">
