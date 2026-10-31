@@ -42,13 +42,13 @@ const generatePanoramicCards = (images: PanoramicImage[]): Card[] => {
       item,
       z: Math.round(10 - absOffset),
       desktop: {
-        // opening state: a large fan that fills the screen, then shrinks and spreads into the arc
-        stacked: { x: offset * 3.2, y: offset * -1.2, rotateZ: offset * 4, rotateY: 0, scale: 2.05 },
+        // closed state: a neat, slightly fanned stack at the centre
+        stacked: { x: offset * 1.8, y: offset * -1.2, rotateZ: offset * 3, rotateY: 0, scale: 1.3 },
         panoramic: { x: offset * 10.5, y: absOffset * 2.6, rotateZ: offset * 1.2, rotateY: offset * -11, scale: 1 - absOffset * 0.05 },
         size: { w: "15vw", h: "27vh", ml: "-7.5vw", mt: "-13.5vh" },
       },
       mobile: {
-        stacked: { x: offset * 2.4, y: offset * -1.2, rotateZ: offset * 4.5, rotateY: 0, scale: 1.6 },
+        stacked: { x: offset * 1.8, y: offset * -1.2, rotateZ: offset * 3.5, rotateY: 0, scale: 1.25 },
         // phones: wider, flatter arc so each piece reads (outer cards run off-screen, which fills the width)
         panoramic: { x: offset * 14, y: absOffset * 4.5, rotateZ: offset * 3, rotateY: offset * -6, scale: 1 - absOffset * 0.07 },
         size: { w: "30vw", h: "21vh", ml: "-15vw", mt: "-10.5vh" },
@@ -147,7 +147,7 @@ export default function PanoramicSpreadHero({
   images = DEFAULT_IMAGES,
   eyebrow = "The Collection",
   title = "Unfolding, piece by piece.",
-  description = "Scroll to spread the collection — necklaces, earrings, cuffs, rings and brooches designed for the moments that matter.",
+  description = "Necklaces, earrings, cuffs, rings and brooches — designed for everyday elegance and the moments that matter.",
   children,
 }: Props) {
   const wrapRef = useRef<HTMLDivElement>(null);
@@ -164,8 +164,10 @@ export default function PanoramicSpreadHero({
 
   const { scrollYProgress } = useScroll({ target: wrapRef, offset: ["start start", "end end"] });
   const smoothProgress = useSpring(scrollYProgress, PROGRESS_SPRING);
-  const scrubbed = useTransform(smoothProgress, [0.02, 0.78], [0, 1]);
-  // Reduced motion: present the finished, spread state with no scroll-driven movement.
+  // Reversed: the section opens fully spread (1); scrolling down gathers the cards into a closed stack (0),
+  // scrolling back up opens them again.
+  const scrubbed = useTransform(smoothProgress, [0.04, 0.82], [1, 0]);
+  // Reduced motion: present the spread state with no scroll-driven movement.
   const still = useMotionValue(1);
   const progress = reduce ? still : scrubbed;
 
@@ -173,10 +175,10 @@ export default function PanoramicSpreadHero({
   useMotionValueEvent(progress, "change", (p) => setSpread(p > 0.95));
   const { tiltX, tiltY } = usePointerTilt(spread, !reduce);
 
-  // Typography rises into place as the cards unspool
+  // Typography sits above the open arc and drifts down / fades as the cards close
   const textY = useTransform(progress, [0.45, 1], ["10vh", "-24vh"]);
   const textScale = useTransform(progress, [0.2, 1], [0.9, 1]);
-  // heading waits until the fan has shrunk out of its way, then fades in
+  // heading is visible while the arc is open and fades before the stack forms
   const textOpacity = useTransform(progress, [0.62, 0.95], [0, 1]);
 
   return (

@@ -28,7 +28,8 @@ export const IMG = {
   // To swap: export each banner at 3840×2160, save as hero-<name>-{3840,1920,1080}.webp, update `name` + `alt`.
   // `position` is the focal point kept in frame on narrow/portrait screens.
   heroSlides: [
-    { name: 'layering', alt: 'Woman in an ivory shirt wearing layered fine gold necklaces and stacked rings', position: '50% 40%', mobilePosition: '45% 50%', placeholder: true },
+    // client-supplied 'Elegant Jewelry in Natural Light' (mirrored so the pieces sit opposite the headline), AI-upscaled to 4K
+    { name: 'infinity', alt: 'Kridhya infinity pendants in silver, rose gold and pearl displayed on driftwood with dried flowers', position: '82% 50%', mobilePosition: '64% 50%' },
     { name: 'bracelets', alt: 'Outstretched wrists wearing delicate gold chain bracelets against black drapery', position: '60% 45%', mobilePosition: '64% 50%', placeholder: true },
     { name: 'everyday-gold', alt: 'Layered gold necklaces and sculptural rings worn against warm skin tones', position: '50% 45%', mobilePosition: '50% 40%', placeholder: true },
     { name: 'gifting', alt: 'Polished gold herringbone necklace worn with a black blazer', position: '62% 40%', mobilePosition: '66% 40%', placeholder: true },

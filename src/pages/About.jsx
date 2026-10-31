@@ -77,11 +77,13 @@ export default function About() {
           <SectionHeading align="center" eyebrow="Our design philosophy" title="Thoughtful. Timeless. Personal." />
           <Stagger className="mt-10 grid gap-px bg-wine-900/10 sm:grid-cols-3">
             {[
-              ['Thoughtful design', 'Our approach is guided by a love for considered design — pieces where every line has a reason to be there.'],
-              ['Timeless elegance', 'We favour silhouettes that outlast trends, so each piece feels as right years from now as it does today.'],
-              ['Pieces that feel personal', 'From everyday expressions of style to gifts chosen for meaningful occasions, every design is made to feel uniquely yours.'],
-            ].map(([t, b], i) => (
+              ['Thoughtful design', 'Our approach is guided by a love for considered design — pieces where every line has a reason to be there.', 'boutique', 'Watercolour illustration of the Kridhya boutique facade'],
+              ['Timeless elegance', 'We favour silhouettes that outlast trends, so each piece feels as right years from now as it does today.', 'necklace-display', 'Watercolour illustration of a necklace on an ivory display bust'],
+              ['Pieces that feel personal', 'From everyday expressions of style to gifts chosen for meaningful occasions, every design is made to feel uniquely yours.', 'jewellery-display', 'Watercolour illustration of jewellery displayed on burgundy velvet stands'],
+            ].map(([t, b, img, alt], i) => (
               <motion.div key={t} variants={blurChild} className="bg-cream p-6 sm:p-8">
+                {/* client-supplied illustration; its white ground was made transparent so it sits on the beige card */}
+                <img src={`/images/illustrations/${img}.webp`} alt={alt} loading="lazy" className="mx-auto mb-5 aspect-square w-full max-w-[280px] object-contain" />
                 <p className="font-display text-[16px] italic text-gold-deep">0{i + 1}</p>
                 <h3 className="mt-3 font-display text-[26px]">{t}</h3>
                 <p className="mt-2 text-[16px] leading-relaxed text-wine-900/65">{b}</p>

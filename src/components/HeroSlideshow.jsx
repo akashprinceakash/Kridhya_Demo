@@ -6,7 +6,7 @@ import { IconArrow, IconArrowLeft, IconPause, IconPlay } from './Icons'
 import { EASE } from './motion'
 
 const COPY = [
-  { label: 'The Layering Edit', eyebrow: 'Kridhya by Devanshi', title: ['Jewellery for the', 'moments that matter.'] },
+  { label: 'The Infinity Edit', eyebrow: 'Kridhya by Devanshi', title: ['Jewellery for the', 'moments that matter.'] },
   { label: 'Bracelets & Cuffs', eyebrow: 'Fine bracelets & cuffs', title: ['Made to move', 'with you.'] },
   { label: 'Everyday Gold', eyebrow: 'Everyday elegance', title: ['Quiet details,', 'lasting meaning.'] },
   { label: 'Gifting', eyebrow: 'Corporate gifting & bulk orders', title: ['Gifts that are kept,', 'not forgotten.'] },
